@@ -1,11 +1,12 @@
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 public class TableroTest {
   @Test
   public void inicioEstaVacio() {
     Tablero t = new Tablero();
-    
+
     assertTrue(t.estaVacio());
   }
 
@@ -20,16 +21,14 @@ public class TableroTest {
   public void obtenerFueraLimitesLanzaExcepcion() {
     Tablero t = new Tablero();
 
-    assertThrows(IllegalArgumentException.class, 
-                 () -> t.obtener(10, 10));
+    assertThrows(IllegalArgumentException.class, () -> t.obtener(10, 10));
   }
 
   @Test
   public void obtenerFueraLimitesLanzaExcepcion2() {
     Tablero t = new Tablero();
 
-    assertThrows(IllegalArgumentException.class, 
-                 () -> t.obtener(6, 7));
+    assertThrows(IllegalArgumentException.class, () -> t.obtener(6, 7));
   }
 
   @Test
@@ -65,7 +64,7 @@ public class TableroTest {
   }
 
   @Test
-  public void tirarEnColumnaDiferente0DeberiaNoEstarVacio() {      
+  public void tirarEnColumnaDiferente0DeberiaNoEstarVacio() {
     Tablero t = new Tablero();
 
     t.tirar(2);
@@ -76,8 +75,43 @@ public class TableroTest {
   @Test
   public void inicioTodasColumnasEstanVacias() {
     Tablero t = new Tablero();
-    
-    for (int i = 0; i < Tablero.COLUMNAS; i++)
-      assertTrue(t.estaVaciaColumna(i));
+
+    for (int i = 0; i < Tablero.COLUMNAS; i++) assertTrue(t.estaVaciaColumna(i));
+  }
+
+  @Test
+  public void despuesTirarUnaColumnaDebeNoEstarVaciaYLasDemasVacias() {
+    Tablero t = new Tablero();
+
+    t.tirar(0);
+
+    assertFalse(t.estaVaciaColumna(0));
+    for (int i = 1; i < Tablero.COLUMNAS; i++) assertTrue(t.estaVaciaColumna(i));
+  }
+
+  @Test
+  public void despuesTirarDosVecesMismoJugadorEnMismaColumnaDebenSerDelMismoJugador() {
+    Tablero t = new Tablero();
+
+    t.tirar(0);
+    t.tirar(2);
+    t.tirar(0);
+
+    assertEquals(Celda.Jugador1, t.obtener(Tablero.FILAS - 1, 0));
+    assertEquals(Celda.Jugador1, t.obtener(Tablero.FILAS - 2, 0));
+  }
+
+  @Test
+  public void despuesLlenarUnaColumnaNoSePuedeTirarMismaColumna() {
+    Tablero t = new Tablero();
+
+    t.tirar(0);
+    t.tirar(0);
+    t.tirar(0);
+    t.tirar(0);
+    t.tirar(0);
+    t.tirar(0);
+
+    assertFalse(t.tirar(0));
   }
 }
