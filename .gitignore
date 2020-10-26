@@ -36,6 +36,8 @@ factoryConfiguration.json
 .gradle
 build/
 
+!app/lib/*.jar
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
