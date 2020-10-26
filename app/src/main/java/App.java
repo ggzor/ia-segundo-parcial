@@ -1,4 +1,4 @@
-import com.golden.gamedev.Game;
+import com.golden.gamedev.*;
 import java.awt.*;
 
 public class App extends Game {
@@ -15,6 +15,8 @@ public class App extends Game {
   }
 
   public static void main(String[] args) throws Exception {
-    System.out.println("Hello, World!");
+    GameLoader game = new GameLoader();
+    game.setup(new App(), new Dimension(640, 480), false);
+    game.start();
   }
 }

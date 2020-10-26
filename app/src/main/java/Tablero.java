@@ -63,7 +63,7 @@ public class Tablero {
     if (!Arrays.stream(a)
         .allMatch(fila -> fila.chars().allMatch(c -> c == '1' || c == '2' || c == ' ')))
       return Optional.empty();
-    
+
     return Optional.of(new Tablero());
   }
 }
