@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Optional;
 
 public class Tablero {
   public static final int COLUMNAS = 7;
@@ -48,5 +49,21 @@ public class Tablero {
 
   public boolean estaVaciaColumna(int i) {
     return celdas[FILAS - 1][i] == Celda.Vacio;
+  }
+
+  public int obtenerConsecutivos(int n, Celda jugador) {
+    return 0;
+  }
+
+  public static Optional<Tablero> deArreglo(String[] a) {
+    if (a.length != FILAS) return Optional.empty();
+    if (!Arrays.stream(a).allMatch(fila -> fila.length() == COLUMNAS)) return Optional.empty();
+    // if (!Arrays.stream(a).flatMapToInt(s -> s.chars()).allMatch(c -> c == '1' || c == '2' || c ==
+    // '3'))
+    if (!Arrays.stream(a)
+        .allMatch(fila -> fila.chars().allMatch(c -> c == '1' || c == '2' || c == ' ')))
+      return Optional.empty();
+    
+    return Optional.of(new Tablero());
   }
 }

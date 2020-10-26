@@ -12,6 +12,7 @@ data Celda = Vacio | Jugador1 | Jugador2
   - [X] obtener
   - [X] estaVaciaColumna
   - [X] tirar
+  - [ ] Tablero.deArreglo
   - [ ] obtenerGanador()
     - [ ] obtenerConsecutivos(n, Celda.Vacio)
   - [ ] h1(c1, c2): Consecutivas del jugador
