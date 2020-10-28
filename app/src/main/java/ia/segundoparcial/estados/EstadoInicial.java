@@ -20,11 +20,9 @@ public class EstadoInicial extends Estado {
         Flex.Centro,
         new Componente[] {
           new Imagen(Recursos.SPLASH_SCREEN, 0.2),
-          new BotonSimple("Jugar", () -> siguientePresionado = true),
+          new Boton("Jugar", () -> siguientePresionado = true),
           Espacio.A(12),
-          new BotonSimple("Texto un poco largo", () -> siguientePresionado = true),
-          Espacio.A(12),
-          new BotonSimple("Salir", () -> System.exit(0))
+          new Boton("Salir", () -> System.exit(0))
         });
   }
 }
