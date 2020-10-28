@@ -140,4 +140,9 @@ public class Flex extends Componente {
   public static final Alineamiento Inicio = Alineamiento.Inicio;
   public static final Alineamiento Centro = Alineamiento.Centro;
   public static final Alineamiento Fin = Alineamiento.Fin;
+
+  // Layouts comunes
+  public static Flex VCentro(Componente... componentes) {
+    return new Flex(Vertical, Centro, componentes);
+  }
 }
