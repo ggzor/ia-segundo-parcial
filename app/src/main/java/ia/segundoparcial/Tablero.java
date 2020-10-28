@@ -57,6 +57,10 @@ public class Tablero {
     return 0;
   }
 
+  public Celda obtenerJugadorActual() {
+    return turnoJugador ? Celda.Jugador1 : Celda.Jugador2;
+  }
+
   public static Optional<Tablero> deArreglo(String[] a) {
     if (a.length != FILAS) return Optional.empty();
     if (!Arrays.stream(a).allMatch(fila -> fila.length() == COLUMNAS)) return Optional.empty();

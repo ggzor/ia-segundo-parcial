@@ -116,4 +116,32 @@ public class TableroTest {
 
     assertFalse(t.tirar(0));
   }
+
+  @Test
+  public void obtenerJugadorInicialmenteDevuelveJugador1() {
+    Tablero t = new Tablero();
+
+    assertEquals(Celda.Jugador1, t.obtenerJugadorActual());
+  }
+
+  @Test
+  public void obtenerJugadorActualDevuelveJugador2DespuesDeTirar1Vez() {
+    Tablero t = new Tablero();
+
+    t.tirar(0);
+
+    assertEquals(Celda.Jugador2, t.obtenerJugadorActual());
+  }
+
+  @Test
+  public void obtenerJugadorActualDevuelveJugador1DespuesDeTirarUnNumeroParVeces() {
+    Tablero t = new Tablero();
+
+    t.tirar(0);
+    t.tirar(0);
+    t.tirar(0);
+    t.tirar(0);
+
+    assertEquals(Celda.Jugador1, t.obtenerJugadorActual());
+  }
 }
