@@ -2,12 +2,18 @@ package ia.segundoparcial.componentes;
 
 import com.golden.gamedev.Game;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 
-public abstract class DecoradorGrafico extends Componente {
-  protected final Componente componente;
+public abstract class Decorador extends Componente {
+  protected Componente componente;
 
-  public DecoradorGrafico(Componente componente) {
+  public Decorador(Componente componente) {
     this.componente = componente;
+  }
+
+  @Override
+  public void dibujar(Graphics2D g, Game game) {
+    componente.dibujar(g, game);
   }
 
   @Override
