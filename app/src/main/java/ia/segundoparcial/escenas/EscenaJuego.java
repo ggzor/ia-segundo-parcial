@@ -3,6 +3,7 @@ package ia.segundoparcial.escenas;
 import com.golden.gamedev.Game;
 import ia.segundoparcial.Recursos;
 import ia.segundoparcial.componentes.*;
+import java.awt.Color;
 
 public class EscenaJuego extends Escena {
   private boolean volver = false;
@@ -19,10 +20,9 @@ public class EscenaJuego extends Escena {
         Flex.Vertical,
         Flex.Centro,
         new Componente[] {
-          // spotless:off
-          new Imagen(Recursos.SPLASH_SCREEN, 0.3), 
+          Decorar.Color(Color.BLACK, new Label("Comienza a jugar ya!", Recursos.FUENTE)),
+          new Imagen(Recursos.SPLASH_SCREEN, 0.2),
           new Boton("Volver", () -> volver = true),
-          // spotless:on
         });
   }
 }
