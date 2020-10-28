@@ -1,60 +1,81 @@
 package ia.segundoparcial.escenas;
 
 import com.golden.gamedev.Game;
+import ia.segundoparcial.Celda;
 import ia.segundoparcial.Tablero;
 import ia.segundoparcial.componentes.*;
-import java.awt.event.*;
-import java.util.HashMap;
+import java.util.*;
+import java.util.concurrent.*;
 
 public class EscenaJuego extends Escena {
   public static final int DEBOUNCE_MOVIMIENTO_MS = 190;
 
+  private static ForkJoinPool pool = new ForkJoinPool();
+  private static Random random = new Random();
+
   private boolean volver = false;
+
+  private boolean mouseDentroJuego = false;
+  private int nuevoIndice = Tablero.COLUMNAS / 2;
 
   private Tablero tablero;
   private int indiceActual;
+
+  private ForkJoinTask<Integer> resultadoTiro;
+  private EstadoIA estadoIA = EstadoIA.Esperando;
+  private long tiempoFin;
 
   public EscenaJuego() {
     tablero = new Tablero();
     indiceActual = Tablero.COLUMNAS / 2;
   }
 
-  private static HashMap<Integer, HashMap<Integer, Long>> registro = new HashMap<>();
-
-  private static void debounce(Object id1, int id2, long tiempo, final Runnable accion) {
-    HashMap<Integer, Long> tiempos =
-        registro.computeIfAbsent(
-            id1.hashCode(),
-            k -> {
-              HashMap<Integer, Long> nuevo = new HashMap<>();
-              accion.run();
-              nuevo.put(id2, System.currentTimeMillis());
-              return nuevo;
-            });
-
-    long ultimo = tiempos.getOrDefault((Integer) id2, -1L);
-    long ahora = System.currentTimeMillis();
-    if (ahora - tiempo > ultimo) {
-      tiempos.put(id2, ahora);
-      accion.run();
-    }
-  }
+  public static enum EstadoIA {
+    Esperando,
+    Pensando,
+    Mostrar
+  };
 
   @Override
   public Escena actualizar(Game app, long elapsedTime) {
     if (volver) return new EscenaPrincipal();
     else {
-      if (app.keyDown(KeyEvent.VK_RIGHT)) {
-        debounce(
-            this,
-            0,
-            DEBOUNCE_MOVIMIENTO_MS,
-            () -> indiceActual = Math.min(Tablero.COLUMNAS - 1, indiceActual + 1));
-      } else if (app.keyDown(KeyEvent.VK_LEFT)) {
-        debounce(
-            this, 0, DEBOUNCE_MOVIMIENTO_MS, () -> indiceActual = Math.max(0, indiceActual - 1));
-      } else if (app.keyPressed(KeyEvent.VK_ENTER) || app.keyPressed(KeyEvent.VK_SPACE)) {
-        tablero.tirar(indiceActual);
+      if (tablero.obtenerJugadorActual() == Celda.Jugador1) {
+        if (mouseDentroJuego) {
+          indiceActual = nuevoIndice;
+
+          if (app.click()) {
+            tablero.tirar(indiceActual);
+          }
+        }
+      } else {
+        switch (estadoIA) {
+          default:
+          case Esperando:
+            resultadoTiro =
+                pool.submit(
+                    () -> {
+                      Thread.sleep(500);
+                      return random.nextInt(Tablero.COLUMNAS);
+                    });
+            estadoIA = EstadoIA.Pensando;
+            break;
+
+          case Pensando:
+            if (resultadoTiro.isDone()) {
+              tiempoFin = System.currentTimeMillis();
+              estadoIA = EstadoIA.Mostrar;
+              indiceActual = resultadoTiro.join();
+            }
+            break;
+
+          case Mostrar:
+            if (System.currentTimeMillis() - tiempoFin > 500) {
+              tablero.tirar(indiceActual);
+              estadoIA = EstadoIA.Esperando;
+            }
+            break;
+        }
       }
 
       return this;
@@ -63,17 +84,15 @@ public class EscenaJuego extends Escena {
 
   @Override
   public Componente dibujar() {
-    return new Flex(
-        Flex.Vertical,
-        Flex.Centro,
-        new Componente[] {
-          // spotless:off
-          new SelectorIndice(indiceActual, tablero.obtenerJugadorActual()),
-          Espacio.A(16),
-          new VistaTablero(tablero),
-          Espacio.A(16),
-          new Boton("Volver", () -> volver = true),
-          // spotless:on
-        });
+    return Flex.VCentro(
+        Decorar.MouseDentro(
+            dentro -> mouseDentroJuego = dentro,
+            Flex.VCentro(
+                new SelectorIndice(
+                    indiceActual, tablero.obtenerJugadorActual(), i -> nuevoIndice = i),
+                Espacio.A(16),
+                new VistaTablero(tablero),
+                Espacio.A(16))),
+        new Boton("Volver", () -> volver = true));
   }
 }
