@@ -31,4 +31,9 @@ public class Espacio extends Componente {
   public static Espacio V(int alto) {
     return new Espacio(0, alto);
   }
+
+  // Crea espacio en ambas direcciones
+  public static Espacio A(int medida) {
+    return new Espacio(medida, medida);
+  }
 }

@@ -16,14 +16,14 @@ public class EstadoInicial extends Estado {
   @Override
   public Componente dibujar() {
     return new Flex(
-        Flex.Vertical,
+        Flex.Horizontal,
         Flex.Centro,
         new Componente[] {
           new Imagen(Recursos.SPLASH_SCREEN, 0.2),
           new BotonSimple("Jugar", () -> siguientePresionado = true),
-          Espacio.V(12),
+          Espacio.A(12),
           new BotonSimple("Texto un poco largo", () -> siguientePresionado = true),
-          Espacio.V(12),
+          Espacio.A(12),
           new BotonSimple("Salir", () -> System.exit(0))
         });
   }
