@@ -1,3 +1,5 @@
+package ia.segundoparcial;
+
 import java.util.Arrays;
 import java.util.Optional;
 

@@ -1,3 +1,5 @@
+package ia.segundoparcial;
+
 public enum Celda {
   Vacio,
   Jugador1,
