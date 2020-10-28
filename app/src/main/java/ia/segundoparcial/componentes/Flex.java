@@ -6,14 +6,26 @@ import java.awt.geom.*;
 import java.util.Arrays;
 import java.util.function.*;
 
+/**
+ * Clase que puede apilar sub-componentes en cualquiera de los dos ejes
+ * y los puede alinear al inicio, centro y fin.
+ */
 public class Flex extends Componente {
+  // Funciones para obtener el eje primario y secundario de una dimension
+  // Estos valores dependen de la dirección que se haya escogido para el componente
   private final Function<Dimension, Double> ejePrimario;
   private final Function<Dimension, Double> ejeSecundario;
 
+  // Una idea similar a las anteriores funciones, pero para aplicar una translación
+  // en los ejes de un Graphics2D
   private final BiConsumer<Double, Graphics2D> transformadorPrimario;
   private final BiConsumer<Double, Graphics2D> transformadorSecundario;
 
+  // La regla de como incrementar dimensiones dependiendo del eje
   private final BinaryOperator<Dimension> incrementarDimension;
+
+  // Este operador depende del tipo de alineamiento que se utilice, tomando el máximo
+  // y el valor actual
   private final BinaryOperator<Double> ajuste;
 
   private final Componente[] componentes;
@@ -21,6 +33,7 @@ public class Flex extends Componente {
   public Flex(Direccion direccion, Alineamiento alineamiento, Componente[] componentes) {
     this.componentes = componentes;
 
+    // Determinar funciones que dependen de la dirección
     switch (direccion) {
       case Horizontal:
         ejePrimario = d -> d.getWidth();
@@ -51,6 +64,7 @@ public class Flex extends Componente {
         break;
     }
 
+    // Determinar funciones que dependen del alineamiento
     switch (alineamiento) {
       default:
       case Inicio:
@@ -67,8 +81,10 @@ public class Flex extends Componente {
 
   @Override
   public void dibujar(Graphics2D g, Game game) {
+    // Guardar transformación anterior
     AffineTransform previa = g.getTransform();
 
+    // Apilar los componentes de acuerdo a la dirección y alineamiento específicos
     double maximo = ejeSecundario.apply(obtenerDimensiones());
     for (Componente hijo : componentes) {
       if (hijo != null) {
@@ -84,6 +100,7 @@ public class Flex extends Componente {
       }
     }
 
+    // Restaurar transformación anterior
     g.setTransform(previa);
   }
 
