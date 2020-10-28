@@ -1,15 +1,15 @@
-package ia.segundoparcial.estados;
+package ia.segundoparcial.escenas;
 
 import com.golden.gamedev.Game;
 import ia.segundoparcial.Recursos;
 import ia.segundoparcial.componentes.*;
 
-public class EstadoJuego extends Estado {
+public class EscenaJuego extends Escena {
   private boolean volver = false;
 
   @Override
-  public Estado actualizar(Game app, long elapsedTime) {
-    if (volver) return new EstadoInicial();
+  public Escena actualizar(Game app, long elapsedTime) {
+    if (volver) return new EscenaPrincipal();
     return this;
   }
 

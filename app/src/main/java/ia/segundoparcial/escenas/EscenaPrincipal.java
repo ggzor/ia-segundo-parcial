@@ -1,15 +1,15 @@
-package ia.segundoparcial.estados;
+package ia.segundoparcial.escenas;
 
 import com.golden.gamedev.Game;
 import ia.segundoparcial.Recursos;
 import ia.segundoparcial.componentes.*;
 
-public class EstadoInicial extends Estado {
+public class EscenaPrincipal extends Escena {
   boolean siguientePresionado = false;
 
   @Override
-  public Estado actualizar(Game app, long elapsedTime) {
-    if (siguientePresionado) return new EstadoJuego();
+  public Escena actualizar(Game app, long elapsedTime) {
+    if (siguientePresionado) return new EscenaJuego();
     else return this;
   }
 

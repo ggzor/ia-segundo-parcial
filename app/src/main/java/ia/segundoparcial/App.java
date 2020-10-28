@@ -2,27 +2,27 @@ package ia.segundoparcial;
 
 import com.golden.gamedev.*;
 import ia.segundoparcial.componentes.*;
-import ia.segundoparcial.estados.*;
+import ia.segundoparcial.escenas.*;
 import java.awt.*;
 
 public class App extends Game {
-  private Estado estado;
+  private Escena escena;
 
   public App() {}
 
   public void initResources() {
     Recursos.inicializar();
 
-    estado = new EstadoInicial();
+    escena = new EscenaPrincipal();
   }
 
   private Componente raiz;
 
   public void update(long elapsedTime) {
-    estado = estado.actualizar(this, elapsedTime);
+    escena = escena.actualizar(this, elapsedTime);
 
     // Dibujar componentes
-    raiz = estado.dibujar();
+    raiz = escena.dibujar();
 
     // Actualizar estados
     raiz.update(this, elapsedTime);

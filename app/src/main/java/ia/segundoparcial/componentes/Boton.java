@@ -1,9 +1,7 @@
 package ia.segundoparcial.componentes;
 
-import ia.segundoparcial.Recursos;
-
 import com.golden.gamedev.Game;
-
+import ia.segundoparcial.Recursos;
 import java.awt.*;
 
 public class Boton extends Componente {
