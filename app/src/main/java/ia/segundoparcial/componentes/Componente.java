@@ -6,5 +6,7 @@ import java.awt.*;
 public abstract class Componente {
   public abstract void dibujar(Graphics2D g, Game game);
 
+  public abstract void update(Game game, long elapsed);
+
   public abstract Dimension obtenerDimensiones();
 }

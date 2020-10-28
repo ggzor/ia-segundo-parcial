@@ -24,4 +24,7 @@ public class Imagen extends Componente {
   public Dimension obtenerDimensiones() {
     return new Dimension((int) (imagen.getWidth() * escala), (int) (imagen.getHeight() * escala));
   }
+
+  @Override
+  public void update(Game game, long elapsed) {}
 }

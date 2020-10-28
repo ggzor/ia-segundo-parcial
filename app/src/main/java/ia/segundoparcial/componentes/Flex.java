@@ -112,6 +112,16 @@ public class Flex extends Componente {
         .reduce(new Dimension(0, 0), incrementarDimension);
   }
 
+  @Override
+  public void update(Game game, long elapsed) {
+    // Notificar a todos los hijos del llamado
+    for (Componente hijo : componentes) {
+      if (hijo != null) {
+        hijo.update(game, elapsed);
+      }
+    }
+  }
+
   // Propiedades
   public static enum Direccion {
     Horizontal,

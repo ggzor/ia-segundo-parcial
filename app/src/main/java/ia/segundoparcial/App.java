@@ -16,8 +16,16 @@ public class App extends Game {
     estado = new EstadoInicial();
   }
 
+  private Componente raiz;
+
   public void update(long elapsedTime) {
     estado = estado.actualizar(this, elapsedTime);
+
+    // Dibujar componentes
+    raiz = estado.dibujar();
+
+    // Actualizar estados
+    raiz.update(this, elapsedTime);
   }
 
   public void render(Graphics2D g) {
@@ -29,7 +37,6 @@ public class App extends Game {
     g.setColor(Color.WHITE);
     g.fillRect(0, 0, getWidth(), getHeight());
 
-    Componente raiz = estado.dibujar();
     raiz.dibujar(g, this);
 
     g.translate(-getWidth() * 2, -getHeight() * 2);

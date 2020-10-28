@@ -21,6 +21,10 @@ public class Boton extends Componente {
 
   private boolean hayClick = false;
 
+  @Override
+  public void update(Game game, long elapsed) {
+    hayClick = game.click();
+  }
 
   @Override
   public void dibujar(Graphics2D g, Game game) {

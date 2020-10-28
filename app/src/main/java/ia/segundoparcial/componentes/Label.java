@@ -58,4 +58,7 @@ public class Label extends Componente {
 
     return new Dimension((int) medidas.getWidth(), (int) medidas.getHeight());
   }
+
+  @Override
+  public void update(Game game, long elapsed) {}
 }

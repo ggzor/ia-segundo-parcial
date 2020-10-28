@@ -36,4 +36,7 @@ public class Espacio extends Componente {
   public static Espacio A(int medida) {
     return new Espacio(medida, medida);
   }
+
+  @Override
+  public void update(Game game, long elapsed) {}
 }
