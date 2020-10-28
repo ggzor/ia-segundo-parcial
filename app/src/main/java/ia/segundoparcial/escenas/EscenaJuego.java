@@ -16,7 +16,7 @@ public class EscenaJuego extends Escena {
   @Override
   public Componente dibujar() {
     return new Flex(
-        Flex.Horizontal,
+        Flex.Vertical,
         Flex.Centro,
         new Componente[] {
           // spotless:off

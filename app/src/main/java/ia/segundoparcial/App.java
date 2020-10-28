@@ -37,6 +37,12 @@ public class App extends Game {
     g.setColor(Color.WHITE);
     g.fillRect(0, 0, getWidth(), getHeight());
 
+    Dimension dimension = raiz.obtenerDimensiones();
+
+    int dx = (getWidth() - dimension.width) / 2;
+    int dy = (getHeight() - dimension.height) / 2;
+
+    g.translate(dx, dy);
     raiz.dibujar(g, this);
 
     g.translate(-getWidth() * 2, -getHeight() * 2);

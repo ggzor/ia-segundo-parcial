@@ -16,7 +16,7 @@ public class EscenaPrincipal extends Escena {
   @Override
   public Componente dibujar() {
     return new Flex(
-        Flex.Horizontal,
+        Flex.Vertical,
         Flex.Centro,
         new Componente[] {
           new Imagen(Recursos.SPLASH_SCREEN, 0.2),
