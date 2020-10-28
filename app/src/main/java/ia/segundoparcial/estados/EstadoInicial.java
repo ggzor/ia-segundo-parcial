@@ -21,7 +21,9 @@ public class EstadoInicial extends Estado {
         new Componente[] {
           new Imagen(Recursos.SPLASH_SCREEN, 0.2),
           new BotonSimple("Jugar", () -> siguientePresionado = true),
+          Espacio.V(12),
           new BotonSimple("Texto un poco largo", () -> siguientePresionado = true),
+          Espacio.V(12),
           new BotonSimple("Salir", () -> System.exit(0))
         });
   }

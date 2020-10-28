@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.function.*;
 
 /**
- * Clase que puede apilar sub-componentes en cualquiera de los dos ejes
- * y los puede alinear al inicio, centro y fin.
+ * Clase que puede apilar sub-componentes en cualquiera de los dos ejes y los puede alinear al
+ * inicio, centro y fin.
  */
 public class Flex extends Componente {
   // Funciones para obtener el eje primario y secundario de una dimension
