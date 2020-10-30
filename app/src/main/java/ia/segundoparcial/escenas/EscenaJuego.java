@@ -34,7 +34,7 @@ public class EscenaJuego extends Escena {
 
   @Override
   public Escena actualizar(Game app, long elapsedTime) {
-    if (volver) return new EscenaPrincipal();
+    if (volver) return new EscenaDificultad();
     else {
       Agente agente = tablero.obtenerJugadorActual() == Celda.Jugador1 ? jugador1 : jugador2;
 

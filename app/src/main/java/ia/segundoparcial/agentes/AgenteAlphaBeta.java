@@ -8,6 +8,8 @@ import java.util.concurrent.ForkJoinTask;
 public class AgenteAlphaBeta extends AgenteAutomatico {
   private static ForkJoinPool pool = new ForkJoinPool();
 
+  public AgenteAlphaBeta(int horizonteLimitado) {}
+
   @Override
   public ForkJoinTask<Integer> calcularTiro(Tablero tablero) {
     return pool.submit(

@@ -41,4 +41,33 @@ public class Decorar {
       }
     };
   }
+
+  public static Decorador Margen(int margenX, int margenY, Componente componente) {
+    return new Decorador(componente) {
+      @Override
+      public void dibujar(Graphics2D g, Game game) {
+        g.translate(margenX, margenY);
+        super.dibujar(g, game);
+        g.translate(-margenX, -margenY);
+      }
+
+      @Override
+      public Dimension obtenerDimensiones() {
+        Dimension anteriores = super.obtenerDimensiones();
+        return new Dimension(anteriores.width + 2 * margenX, anteriores.height + 2 * margenY);
+      }
+    };
+  }
+
+  public static Decorador Fondo(Color color, Componente componente) {
+    return new Decorador(componente) {
+      @Override
+      public void dibujar(Graphics2D g, Game game) {
+        Dimension medidas = componente.obtenerDimensiones();
+        g.setColor(color);
+        g.fillRect(0, 0, medidas.width, medidas.height);
+        super.dibujar(g, game);
+      }
+    };
+  }
 }
