@@ -2,6 +2,7 @@ package ia.segundoparcial.escenas;
 
 import com.golden.gamedev.Game;
 import ia.segundoparcial.Recursos;
+import ia.segundoparcial.agentes.*;
 import ia.segundoparcial.componentes.*;
 
 public class EscenaPrincipal extends Escena {
@@ -9,7 +10,7 @@ public class EscenaPrincipal extends Escena {
 
   @Override
   public Escena actualizar(Game app, long elapsedTime) {
-    if (siguientePresionado) return new EscenaJuego();
+    if (siguientePresionado) return new EscenaJuego(new Persona(), new AgenteAleatorio());
     else return this;
   }
 

@@ -3,8 +3,6 @@ package ia.segundoparcial.agentes;
 /**
  * Representa un agente operado por una persona
  *
- * No implementa algún metodo intencionalmente y sólo funciona como una clase marcador.
- *
+ * <p>No implementa algún metodo intencionalmente y sólo funciona como una clase marcador.
  */
-public class Persona extends Agente { }
-
+public class Persona extends Agente {}
