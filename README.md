@@ -12,16 +12,15 @@ data Celda = Vacio | Jugador1 | Jugador2
   - [X] obtener
   - [X] estaVaciaColumna
   - [X] tirar
-  - [ ] Tablero.deArreglo
-  - [ ] obtenerGanador()
-    - [ ] obtenerConsecutivos(n, Celda.Vacio)
+  - [X] Tablero.deArreglo
+  - [X] obtenerGanador()
+    - [X] obtenerConsecutivos(n, Celda.Vacio)
   - [ ] h1(c1, c2): Consecutivas del jugador
   - [ ] Documentar clases y código
   - [ ] f
-  - _Faltan algunos elementos_
-- [ ] Algoritmo poda alfa-beta
-- [ ] Interfaz de usuario
-  - [ ] Mostrar tablero
+- [-] Algoritmo poda alfa-beta
+- [X] Interfaz de usuario
+  - [X] Mostrar tablero
 - [ ] Reporte
   - [ ] Función de evaluación
   - [ ] Describir implementación
