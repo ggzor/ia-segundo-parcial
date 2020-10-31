@@ -70,4 +70,13 @@ public class Decorar {
       }
     };
   }
+
+  public static Decorador Ocultar(boolean oculto, Componente componente) {
+    return new Decorador(componente) {
+      @Override
+      public void dibujar(Graphics2D g, Game game) {
+        if (!oculto) super.dibujar(g, game);
+      }
+    };
+  }
 }

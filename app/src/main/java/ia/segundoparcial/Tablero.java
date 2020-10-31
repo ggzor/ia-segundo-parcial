@@ -30,6 +30,10 @@ public class Tablero {
     return true;
   }
 
+  public boolean estaLleno() {
+    return Arrays.stream(celdas).flatMap(Arrays::stream).allMatch(c -> c != Celda.Vacio);
+  }
+
   public Celda obtener(int fila, int columna) {
     boolean estaRangoFilas = 0 <= fila && fila <= FILAS - 1;
     boolean estaRangoColumnas = 0 <= columna && columna <= COLUMNAS - 1;
