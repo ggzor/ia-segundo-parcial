@@ -1,32 +1,11 @@
 package ia.segundoparcial.alphabeta;
 
-import java.util.*;
+import ia.segundoparcial.utils.Par;
 
+// Contiene la función para aplicar el algoritmo de poda alpha-beta dado un estado
+// inicial y una profundidad máxima
 public class AlphaBeta {
-  public static interface Estado<M> {
-    M generadoPor();
-
-    ArrayList<Estado<M>> expandir();
-
-    double f();
-
-    boolean esTerminal();
-  }
-
-  public static class Par<A, B> {
-    public final A primero;
-    public final B segundo;
-
-    public Par(A primero, B segundo) {
-      this.primero = primero;
-      this.segundo = segundo;
-    }
-
-    public static <A, B> Par<A, B> de(A primero, B segundo) {
-      return new Par<A, B>(primero, segundo);
-    }
-  }
-
+  // Realizar la llamada inicial a alpha-beta
   public static <M> Par<Double, M> calcular(Estado<M> inicial, int profundidadMaxima) {
     return alphaBeta(
         inicial, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, 0, profundidadMaxima, true);
@@ -39,9 +18,11 @@ public class AlphaBeta {
       int profundidad,
       int profundidadMaxima,
       boolean esMax) {
+    // Determinar si es un nodo hoja o está en el horizonte limitado
     if (actual.esTerminal() || profundidad == profundidadMaxima)
       return Par.de(actual.f(), actual.generadoPor());
 
+    // Iteracion sobre los hijos
     M movimiento = actual.generadoPor();
     for (Estado<M> siguiente : actual.expandir()) {
       if (esMax) {
@@ -67,6 +48,7 @@ public class AlphaBeta {
       }
     }
 
+    // Determinar el valor de retorno cuando se ha iterado en todos los hijos
     if (esMax) {
       return Par.de(alpha, movimiento);
     } else {

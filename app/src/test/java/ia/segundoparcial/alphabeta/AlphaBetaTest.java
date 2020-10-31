@@ -2,7 +2,7 @@ package ia.segundoparcial.alphabeta;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import ia.segundoparcial.alphabeta.AlphaBeta.Estado;
+import ia.segundoparcial.utils.Par;
 import java.util.*;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class AlphaBetaTest {
     Derecha
   };
 
-  public static class EstadoEjemplo1 implements AlphaBeta.Estado<Direccion> {
+  public static class EstadoEjemplo1 implements Estado<Direccion> {
     private final ArrayList<Estado<Direccion>> hijos;
     private final Integer valor;
     private final Direccion direccion;
@@ -120,7 +120,7 @@ public class AlphaBetaTest {
       ));
       // spotless:on
 
-    AlphaBeta.Par<Double, Direccion> resultado = AlphaBeta.calcular(inicial, 4);
+    Par<Double, Direccion> resultado = AlphaBeta.calcular(inicial, 4);
     assertEquals(11.0, resultado.primero, 0.001);
     assertEquals(Direccion.Izquierda, resultado.segundo);
   }
