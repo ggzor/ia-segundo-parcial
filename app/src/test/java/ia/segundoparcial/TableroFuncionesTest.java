@@ -24,7 +24,7 @@ public class TableroFuncionesTest {
   }
 
   @Test
-  public void cadenasFueraDeRangoDeFilasRetornaNull() {
+  public void cadenasFueraDeRangoDeFilasNoSeInstancia() {
     // spotless:off
     Optional<Tablero> t = Tablero.deArreglo(new String[] {
         "       ",
@@ -39,7 +39,7 @@ public class TableroFuncionesTest {
   }
 
   @Test
-  public void cadenasFueraDeRangoDeColumnasRetornaNull() {
+  public void cadenasFueraDeRangoDeColumnaaNoSeInstancia() {
     // spotless:off
     Optional<Tablero> t = Tablero.deArreglo(new String[] {
       "       ",
@@ -68,5 +68,38 @@ public class TableroFuncionesTest {
     // spotless:on
 
     assertFalse(t.isPresent());
+  }
+
+  @Test
+  public void piezasEnColumnasNoCumplenReglasNoSeCreaTablero() {
+    // spotless:off
+    Optional<Tablero> t = Tablero.deArreglo(new String[] {
+      "     1 ",
+      "  1  1 ",
+      "  1  2 ",
+      "     1 ",
+      "  1  1 ",
+      "       ",
+    });
+    // spotless:on
+
+    assertFalse(t.isPresent());
+  }
+
+  @Test
+  public void tableroCorrectoNoEsVacio() {
+    // spotless:off
+    Optional<Tablero> t = Tablero.deArreglo(new String[] {
+      "       ",
+      "       ",
+      "       ",
+      "2      ",
+      "1 2  2 ",
+      "1 1  1 ",
+    });
+    // spotless:on
+
+    assertTrue(t.isPresent());
+    assertFalse(t.get().estaVacio());
   }
 }
