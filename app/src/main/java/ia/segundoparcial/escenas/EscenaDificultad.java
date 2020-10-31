@@ -4,7 +4,6 @@ import com.golden.gamedev.Game;
 import ia.segundoparcial.Recursos;
 import ia.segundoparcial.agentes.*;
 import ia.segundoparcial.componentes.*;
-
 import java.awt.Color;
 import java.util.*;
 import java.util.function.*;
