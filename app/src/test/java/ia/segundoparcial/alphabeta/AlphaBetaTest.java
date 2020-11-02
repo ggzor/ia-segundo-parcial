@@ -101,8 +101,28 @@ public class AlphaBetaTest {
             N(N(6), N(12), N(15))
           )
         ), 4, 7.0, 0, Arrays.asList(2, 7, 8, 11, 6, 3, 1, 2, 5)
+      ),
+      Arguments.of(
+        N(
+          N(
+            N(1, 
+              N(0), N(0)),
+            N(8),
+            N(5, 
+              N(0), N(0))
+          ),
+          N(
+            N(3),
+            N(2, 
+              N(0), N(0), N(0))
+          ),
+          N(
+            N(9),
+            N(6,
+              N(0), N(0))
+          )
+        ), 2, 6.0, 2, Arrays.asList(1, 8, 5, 3, 2, 9, 6)
       )
-
       // spotless:on
         );
   }
