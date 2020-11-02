@@ -3,7 +3,11 @@ package ia.segundoparcial;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TableroFuncionesTest {
   @Test
@@ -101,5 +105,33 @@ public class TableroFuncionesTest {
 
     assertTrue(t.isPresent());
     assertFalse(t.get().estaVacio());
+  }
+
+  private static Stream<Arguments> columnasDisponiblesArgumentos() {
+    return Stream.of(
+        // spotless:off
+      Arguments.of(
+        new String[] {
+          "       ",
+          "       ",
+          "       ",
+          "       ",
+          "       ",
+          "       ",
+        }, new int[] { 0, 1, 2, 3, 4, 5, 6 }
+      )
+      // spotless:on
+        );
+  }
+
+  @ParameterizedTest
+  @MethodSource("columnasDisponiblesArgumentos")
+  public void columnasDisponiblesDeVacioRegresaTodosIndices(String[] arreglo, int[] esperado) {
+    Optional<Tablero> t = Tablero.deArreglo(arreglo);
+
+    assertTrue(t.isPresent());
+
+    Tablero tablero = t.get();
+    assertArrayEquals(esperado, tablero.obtenerColumnasDisponibles());
   }
 }

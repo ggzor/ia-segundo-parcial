@@ -381,4 +381,8 @@ public class Tablero {
       }
     return Optional.of(t);
   }
+
+  public int[] obtenerColumnasDisponibles() {
+    return null;
+  }
 }
