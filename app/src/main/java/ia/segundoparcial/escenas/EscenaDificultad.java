@@ -28,11 +28,11 @@ public class EscenaDificultad extends Escena {
     etiquetas.add("Aleatoria");
     generadores.add(() -> new AgenteAleatorio());
 
-    etiquetas.add("Fácil");
+    etiquetas.add(String.format("Fácil-%d", PROFUNDIDAD_FACIL));
     generadores.add(() -> new AgenteAlphaBeta(PROFUNDIDAD_FACIL));
-    etiquetas.add("Moderada");
+    etiquetas.add(String.format("Moderada-%d", PROFUNDIDAD_MODERADO));
     generadores.add(() -> new AgenteAlphaBeta(PROFUNDIDAD_MODERADO));
-    etiquetas.add("Difícil");
+    etiquetas.add(String.format("Difícil-%d", PROFUNDIDAD_DIFICIL));
     generadores.add(() -> new AgenteAlphaBeta(PROFUNDIDAD_DIFICIL));
   }
 
