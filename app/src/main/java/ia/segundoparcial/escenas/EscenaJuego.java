@@ -31,6 +31,7 @@ public class EscenaJuego extends Escena {
 
   private EstadoAgente estadoAgente = EstadoAgente.Esperando;
   private ForkJoinTask<Integer> respuestaAgente = null;
+  private long tiempoInicioPensar;
   private long tiempoFin;
 
   private boolean teniaGanador = false;
@@ -71,6 +72,7 @@ public class EscenaJuego extends Escena {
             } else {
               AgenteAutomatico agenteAutomatico = (AgenteAutomatico) agente;
               respuestaAgente = agenteAutomatico.calcularTiro(tablero);
+              tiempoInicioPensar = System.currentTimeMillis();
               estadoAgente = EstadoAgente.Pensando;
             }
             break;
@@ -109,8 +111,24 @@ public class EscenaJuego extends Escena {
         Decorar.MouseDentro(
             dentro -> mouseDentroJuego = dentro,
             Flex.VCentro(
-                new SelectorIndice(
-                    indiceActual, tablero.obtenerJugadorActual(), i -> nuevoIndice = i),
+                Decorar.Conmutar(
+                    estadoAgente == EstadoAgente.Pensando ? 0 : 1,
+                    new Flex(
+                        Flex.Horizontal,
+                        Flex.Centro,
+                        new Componente[] {
+                          new MarcadorProgreso(System.currentTimeMillis() - tiempoInicioPensar),
+                          Espacio.A(16),
+                          Flex.VCentro(
+                              Espacio.V(28),
+                              Decorar.Color(
+                                  Color.BLACK,
+                                  new Label("Calculando movimiento...", Recursos.FUENTE)))
+                        }),
+                    Flex.VCentro(
+                        Espacio.V(20),
+                        new SelectorIndice(
+                            indiceActual, tablero.obtenerJugadorActual(), i -> nuevoIndice = i))),
                 Espacio.A(16),
                 new VistaTablero(tablero))),
         Espacio.A(32),

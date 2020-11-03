@@ -14,7 +14,7 @@ public class AgenteAlphaBeta extends AgenteAutomatico {
   public ForkJoinTask<Integer> calcularTiro(Tablero tablero) {
     return pool.submit(
         () -> {
-          Thread.sleep(200);
+          Thread.sleep(10000);
           return 3;
         });
   }

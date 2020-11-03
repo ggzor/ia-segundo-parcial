@@ -79,4 +79,25 @@ public class Decorar {
       }
     };
   }
+
+  public static Componente Conmutar(int indice, Componente... componentes) {
+    return new Componente() {
+      @Override
+      public void dibujar(Graphics2D g, Game game) {
+        componentes[indice].dibujar(g, game);
+      }
+
+      @Override
+      public void update(Game game, long elapsed) {
+        for (Componente componente : componentes) {
+          componente.update(game, elapsed);
+        }
+      }
+
+      @Override
+      public Dimension obtenerDimensiones() {
+        return componentes[indice].obtenerDimensiones();
+      }
+    };
+  }
 }
