@@ -6,7 +6,7 @@ import java.util.Optional;
 public class Tablero {
   public static final int COLUMNAS = 7;
   public static final int FILAS = 6;
-
+  public static final int NUMEROGANADOR = 4;
   private Celda[][] celdas;
   private int[] contadores = new int[COLUMNAS];
   private boolean turnoJugador;
@@ -212,8 +212,7 @@ public class Tablero {
   }
 
   public boolean esGanador(Celda jugador) {
-    int fila, columna, k, ganadorNum;
-    ganadorNum = 4;
+    int fila, columna, k;
     // Busca en horizontal
     fila = FILAS - 1;
     while (fila >= 0) {
@@ -226,7 +225,7 @@ public class Tablero {
             columna++;
             if (columna == COLUMNAS) break;
           }
-          if (k == ganadorNum) return true;
+          if (k >= NUMEROGANADOR) return true;
         }
         columna++;
       }
@@ -244,7 +243,7 @@ public class Tablero {
             fila--;
             if (fila == -1) break;
           }
-          if (k == ganadorNum) return true;
+          if (k >= NUMEROGANADOR) return true;
         }
         fila--;
       }
@@ -266,7 +265,7 @@ public class Tablero {
             k++;
             if (auxCelda == -1 || fila == -1) break;
           }
-          if (k == ganadorNum) return true;
+          if (k >= NUMEROGANADOR) return true;
         }
         fila--;
         auxCelda--;
@@ -287,7 +286,7 @@ public class Tablero {
             k++;
             if (auxCelda == -1 || columna == -1) break;
           }
-          if (k == ganadorNum) return true;
+          if (k >= NUMEROGANADOR) return true;
         }
         columna--;
         auxCelda--;
@@ -309,7 +308,7 @@ public class Tablero {
             k++;
             if (auxCelda == COLUMNAS || fila == -1) break;
           }
-          if (k == ganadorNum) return true;
+          if (k >= NUMEROGANADOR) return true;
         }
         fila--;
         auxCelda++;
@@ -330,7 +329,7 @@ public class Tablero {
             k++;
             if (auxCelda == -1 || columna == COLUMNAS) break;
           }
-          if (k == ganadorNum) return true;
+          if (k >= NUMEROGANADOR) return true;
         }
         columna++;
         auxCelda--;

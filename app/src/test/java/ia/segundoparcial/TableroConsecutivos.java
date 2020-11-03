@@ -146,4 +146,55 @@ public class TableroConsecutivos {
     assertTrue(t.isPresent());
     assertTrue(t.get().esGanador(Celda.Jugador1));
   }
+
+  @Test
+  public void ganarJuegoJ2PiezasMayorA4Vertical() {
+    // spotless:off
+    Optional<Tablero> t = Tablero.deArreglo(new String[] {
+      "       ",
+      " 211  1",
+      "2112  1",
+      "1222121",
+      "1221121",
+      "1211211",
+    });
+    // spotless:on
+
+    assertTrue(t.isPresent());
+    assertTrue(t.get().esGanador(Celda.Jugador1));
+  }
+
+  @Test
+  public void ganarJuegoJ1PiezasMayorA4Horizontal() {
+    // spotless:off
+    Optional<Tablero> t = Tablero.deArreglo(new String[] {
+      "       ",
+      "       ",
+      "       ",
+      "  2    ",
+      " 22   1",
+      "2211111",
+    });
+    // spotless:on
+
+    assertTrue(t.isPresent());
+    assertTrue(t.get().esGanador(Celda.Jugador1));
+  }
+
+  @Test
+  public void ganarJuegoJ1PiezasMayorA4Diagonal() {
+    // spotless:off
+    Optional<Tablero> t = Tablero.deArreglo(new String[] {
+      "1      ",
+      "21     ",
+      "211    ",
+      "1221   ",
+      "21121 1",
+      "2212211",
+    });
+    // spotless:on
+
+    assertTrue(t.isPresent());
+    assertTrue(t.get().esGanador(Celda.Jugador1));
+  }
 }
