@@ -383,6 +383,23 @@ public class Tablero {
   }
 
   public int[] obtenerColumnasDisponibles() {
-    return null;
+    int j, contador;
+    j = contador = 0;
+    int[] disponibles = new int[COLUMNAS];
+    while (j < COLUMNAS) {
+      if (celdas[0][j] == Celda.Vacio) {
+        contador++;
+        disponibles[j] = j;
+      } else disponibles[j] = -1;
+      j++;
+    }
+    int[] vacias = new int[contador];
+    j = 0;
+    for (int i = 0; i < COLUMNAS; i++)
+      if (disponibles[i] == i) {
+        vacias[j] = i;
+        j++;
+      }
+    return vacias;
   }
 }

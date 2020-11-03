@@ -113,12 +113,32 @@ public class TableroFuncionesTest {
       Arguments.of(
         new String[] {
           "       ",
-          "       ",
-          "       ",
-          "       ",
-          "       ",
-          "       ",
+          "      1",
+          "      1",
+          "      1",
+          "      1",
+          "      1",
         }, new int[] { 0, 1, 2, 3, 4, 5, 6 }
+      ),
+      Arguments.of(
+        new String[] {
+          " 2    1",
+          " 2    1",
+          " 2    1",
+          " 2 1  1",
+          " 2 1  1",
+          " 2 1  1",
+        }, new int[] { 0, 2, 3, 4, 5}
+      ),
+      Arguments.of(
+        new String[] {
+          "12    1",
+          "12  2 1",
+          "22  2 1",
+          "22 1121",
+          "2211222",
+          "2211221",
+        }, new int[] { 2, 3, 4, 5}
       )
       // spotless:on
         );
