@@ -4,7 +4,6 @@ import com.golden.gamedev.Game;
 import ia.segundoparcial.Recursos;
 import ia.segundoparcial.agentes.*;
 import ia.segundoparcial.componentes.*;
-import java.awt.Color;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.IntStream;
@@ -50,7 +49,7 @@ public class EscenaDificultad extends Escena {
   @Override
   public Componente dibujar() {
     return Flex.VCentro(
-        Decorar.Color(Color.BLACK, new Label("Selección de jugadores", Recursos.FUENTE)),
+        Decorar.Color(Recursos.FOREGROUND, new Label("Selección de jugadores", Recursos.FUENTE)),
         Espacio.A(32),
         dibujarOpcionesJugador(1, i -> jugador1 = i, () -> jugador1),
         Espacio.A(32),
@@ -67,7 +66,7 @@ public class EscenaDificultad extends Escena {
         Flex.Vertical,
         Flex.Inicio,
         new Componente[] {
-          Decorar.Color(Color.BLACK, new Label("Jugador " + jugador, Recursos.FUENTE)),
+          Decorar.Color(Recursos.FOREGROUND, new Label("Jugador " + jugador, Recursos.FUENTE)),
           new Flex(
               Flex.Horizontal,
               Flex.Centro,
@@ -77,8 +76,8 @@ public class EscenaDificultad extends Escena {
                           new Componente[] {
                             Decorar.Fondo(
                                 etiquetas.get(i) == etiquetas.get(leer.get())
-                                    ? Color.ORANGE
-                                    : Color.WHITE,
+                                    ? Recursos.COLOR_PRIMARIO
+                                    : Recursos.BACKGROUND,
                                 Decorar.Margen(
                                     4, 4, new Boton(etiquetas.get(i), () -> establecer.accept(i)))),
                             Espacio.A(8)

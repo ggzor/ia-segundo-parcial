@@ -4,7 +4,6 @@ import com.golden.gamedev.Game;
 import ia.segundoparcial.*;
 import ia.segundoparcial.agentes.*;
 import ia.segundoparcial.componentes.*;
-import java.awt.Color;
 import java.util.concurrent.*;
 
 public class EscenaJuego extends Escena {
@@ -122,7 +121,7 @@ public class EscenaJuego extends Escena {
                           Flex.VCentro(
                               Espacio.V(28),
                               Decorar.Color(
-                                  Color.BLACK,
+                                  Recursos.FOREGROUND,
                                   new Label("Calculando movimiento...", Recursos.FUENTE)))
                         }),
                     Flex.VCentro(
@@ -134,7 +133,8 @@ public class EscenaJuego extends Escena {
         Espacio.A(32),
         Decorar.Ocultar(
             ganador == null,
-            Decorar.Color(Color.BLACK, new Label("El ganador es: " + ganador, Recursos.FUENTE))),
+            Decorar.Color(
+                Recursos.FOREGROUND, new Label("El ganador es: " + ganador, Recursos.FUENTE))),
         Espacio.A(16),
         new Boton("Volver", () -> volver = true));
   }

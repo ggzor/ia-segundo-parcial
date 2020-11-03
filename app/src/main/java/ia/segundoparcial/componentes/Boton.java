@@ -30,12 +30,12 @@ public class Boton extends Componente {
     Point posicionMouse = Utilerias.obtenerPosicionLocalMouse(g, game);
     boolean mouseDentro = Utilerias.dentroDe(dimensiones, posicionMouse);
 
-    if (mouseDentro) g.setColor(Color.RED);
-    else g.setColor(Color.BLACK);
+    if (mouseDentro) g.setColor(Recursos.COLOR_PRIMARIO);
+    else g.setColor(Recursos.FOREGROUND);
 
     g.fillRoundRect(0, 0, (int) dimensiones.getWidth(), (int) dimensiones.getHeight(), ARC, ARC);
 
-    g.setColor(Color.WHITE);
+    g.setColor(Recursos.BACKGROUND);
     // Ese -2 es un poco truculento
     int dy = PAD_Y + (int) (dimensiones.getHeight() / 2) - PAD_Y / 3;
     g.translate(PAD_X, dy);

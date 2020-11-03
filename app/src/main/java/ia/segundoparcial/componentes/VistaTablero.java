@@ -2,6 +2,7 @@ package ia.segundoparcial.componentes;
 
 import com.golden.gamedev.Game;
 import ia.segundoparcial.Celda;
+import ia.segundoparcial.Recursos;
 import ia.segundoparcial.Tablero;
 import java.awt.*;
 
@@ -9,19 +10,15 @@ public class VistaTablero extends Componente {
   public static final int MEDIDA_CELDA = 32;
   public static final int GAP = 8;
 
-  public static final Color COLOR_VACIO = Color.LIGHT_GRAY;
-  public static final Color COLOR_JUGADOR1 = Color.RED;
-  public static final Color COLOR_JUGADOR2 = Color.YELLOW;
-
   public static Color colorParaCelda(Celda celda) {
     switch (celda) {
       case Jugador1:
-        return COLOR_JUGADOR1;
+        return Recursos.COLOR_JUGADOR1;
       case Jugador2:
-        return COLOR_JUGADOR2;
+        return Recursos.COLOR_JUGADOR2;
       default:
       case Vacio:
-        return COLOR_VACIO;
+        return Recursos.COLOR_VACIO;
     }
   }
 

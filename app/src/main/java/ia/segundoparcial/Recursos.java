@@ -13,6 +13,16 @@ public class Recursos {
       Recursos.class.getResourceAsStream("/ComingSoon-Regular.ttf");
   public static Font FUENTE = new Font("Tahoma", Font.PLAIN, 12);
 
+  public static Color BACKGROUND = new Color(0xFFFFFF);
+  public static Color FOREGROUND = new Color(0x000000);
+
+  public static final Color COLOR_JUGADOR1 = new Color(0xB23A48);
+  public static final Color COLOR_JUGADOR2 = new Color(0xFF9505);
+  public static final Color COLOR_VACIO = new Color(0xE0E0E0);
+
+  public static final Color COLOR_PRIMARIO = new Color(0x016FB9);
+  public static final Color COLOR_COMPLEMENTARIO = new Color(0x320D6D);
+
   public static void inicializar() {
     // Intentar cambiar la fuente a una más acorde al juego
     try {

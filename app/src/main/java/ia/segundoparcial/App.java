@@ -34,7 +34,7 @@ public class App extends Game {
     g.setRenderingHint(
         RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-    g.setColor(Color.WHITE);
+    g.setColor(Recursos.BACKGROUND);
     g.fillRect(0, 0, getWidth(), getHeight());
 
     Dimension dimension = raiz.obtenerDimensiones();

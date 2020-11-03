@@ -1,7 +1,7 @@
 package ia.segundoparcial.componentes;
 
 import com.golden.gamedev.Game;
-import java.awt.Color;
+import ia.segundoparcial.Recursos;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 
@@ -18,14 +18,14 @@ public class MarcadorProgreso extends Componente {
 
   @Override
   public void dibujar(Graphics2D g, Game game) {
-    g.setColor(new Color(0x673AB7));
+    g.setColor(Recursos.COLOR_COMPLEMENTARIO);
 
     double anguloBase = 360 * progreso;
     double despBase = 20 * Math.sin(progreso * Math.PI);
     g.fillArc(0, 0, MEDIDA, MEDIDA, (int) -anguloBase, (int) -(anguloBase + despBase));
     int desp = (MEDIDA - MEDIDA_CENTRO) / 2;
 
-    g.setColor(Color.WHITE);
+    g.setColor(Recursos.BACKGROUND);
     g.fillOval(desp, desp, MEDIDA_CENTRO, MEDIDA_CENTRO);
   }
 
