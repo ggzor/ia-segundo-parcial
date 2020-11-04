@@ -1,7 +1,6 @@
 package ia.segundoparcial.escenas;
 
 import com.golden.gamedev.Game;
-
 import ia.segundoparcial.ParametrosEvaluacion;
 import ia.segundoparcial.Recursos;
 import ia.segundoparcial.agentes.*;
@@ -21,7 +20,8 @@ public class EscenaDificultad extends Escena {
   public static final double c2 = 0.8;
   public static final double maxh1 = 12 * (c1 + c2);
   public static final double maxh2 = (24.0 + 30.0 + 36.0) / 3.0;
-  public static final ParametrosEvaluacion evaluacion = new ParametrosEvaluacion(alpha1, maxh1, alpha2, maxh2, c1, c2);
+  public static final ParametrosEvaluacion evaluacion =
+      new ParametrosEvaluacion(alpha1, maxh1, alpha2, maxh2, c1, c2);
 
   private int jugador1 = 0;
   private int jugador2 = 3;

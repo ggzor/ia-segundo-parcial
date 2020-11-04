@@ -1,8 +1,7 @@
 package ia.segundoparcial;
 
-import java.util.ArrayList;
-
 import ia.segundoparcial.alphabeta.Estado;
+import java.util.ArrayList;
 
 public class EstadoTablero implements Estado<Integer> {
 
@@ -36,7 +35,9 @@ public class EstadoTablero implements Estado<Integer> {
 
   @Override
   public boolean esTerminal() {
-    return tablero.esGanador(Celda.Jugador1) || tablero.esGanador(Celda.Jugador2) || tablero.estaLleno();
+    return tablero.esGanador(Celda.Jugador1)
+        || tablero.esGanador(Celda.Jugador2)
+        || tablero.estaLleno();
   }
 
   @Override

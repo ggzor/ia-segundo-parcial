@@ -12,7 +12,8 @@ public class ParametrosEvaluacion {
   private double c1;
   private double c2;
 
-  public ParametrosEvaluacion(double alpha1, double maxh1, double alpha2, double maxh2, double c1, double c2) {
+  public ParametrosEvaluacion(
+      double alpha1, double maxh1, double alpha2, double maxh2, double c1, double c2) {
     this.alpha1 = alpha1;
     this.maxh1 = maxh1;
     this.alpha2 = alpha2;
@@ -39,9 +40,12 @@ public class ParametrosEvaluacion {
 
   private double h2(Tablero tablero, Celda jugador) {
     return IntStream.range(1, 3 + 1)
-            .mapToObj(i -> (Integer)i)
-            .flatMap(i -> Arrays.stream(tablero.obtenerLineasConsecutivas(i, jugador)).flatMap(Arrays::stream))
-            .mapToInt(Tablero::obtenerDistancia)
-            .sum();
+        .mapToObj(i -> (Integer) i)
+        .flatMap(
+            i ->
+                Arrays.stream(tablero.obtenerLineasConsecutivas(i, jugador))
+                    .flatMap(Arrays::stream))
+        .mapToInt(Tablero::obtenerDistancia)
+        .sum();
   }
 }

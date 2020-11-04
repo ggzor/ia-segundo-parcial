@@ -12,9 +12,10 @@ public class AgenteAleatorio extends AgenteAutomatico {
 
   @Override
   public ForkJoinTask<Integer> calcularTiro(Tablero tablero) {
-    return pool.submit(() -> {
-      int[] disponibles = tablero.obtenerColumnasDisponibles();
-      return disponibles[random.nextInt(disponibles.length)];
-    });
+    return pool.submit(
+        () -> {
+          int[] disponibles = tablero.obtenerColumnasDisponibles();
+          return disponibles[random.nextInt(disponibles.length)];
+        });
   }
 }

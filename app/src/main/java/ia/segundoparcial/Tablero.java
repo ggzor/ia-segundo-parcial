@@ -29,7 +29,7 @@ public class Tablero {
   public Tablero(Tablero original) {
     this();
 
-    for(int i = 0; i < FILAS; i++) {
+    for (int i = 0; i < FILAS; i++) {
       System.arraycopy(original.celdas[i], 0, this.celdas[i], 0, COLUMNAS);
     }
     System.arraycopy(original.contadores, 0, this.contadores, 0, COLUMNAS);

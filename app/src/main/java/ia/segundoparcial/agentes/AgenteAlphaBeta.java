@@ -4,7 +4,6 @@ import ia.segundoparcial.EstadoTablero;
 import ia.segundoparcial.ParametrosEvaluacion;
 import ia.segundoparcial.Tablero;
 import ia.segundoparcial.alphabeta.AlphaBeta;
-
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 
