@@ -11,11 +11,11 @@ import java.util.stream.IntStream;
 
 /** EscenaDificultad */
 public class EscenaDificultad extends Escena {
-  public static final int PROFUNDIDAD_FACIL = 10;
-  public static final int PROFUNDIDAD_MODERADO = 20;
-  public static final int PROFUNDIDAD_DIFICIL = 50;
-  public static final double alpha1 = 0.7;
-  public static final double alpha2 = 0.3;
+  public static final int PROFUNDIDAD_FACIL = 2;
+  public static final int PROFUNDIDAD_MODERADO = 8;
+  public static final int PROFUNDIDAD_DIFICIL = 15;
+  public static final double alpha1 = 0.85;
+  public static final double alpha2 = 0.15;
   public static final double c1 = 0.2;
   public static final double c2 = 0.8;
   public static final double maxh1 = 12 * (c1 + c2);
