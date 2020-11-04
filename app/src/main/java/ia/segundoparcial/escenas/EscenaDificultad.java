@@ -1,6 +1,8 @@
 package ia.segundoparcial.escenas;
 
 import com.golden.gamedev.Game;
+
+import ia.segundoparcial.ParametrosEvaluacion;
 import ia.segundoparcial.Recursos;
 import ia.segundoparcial.agentes.*;
 import ia.segundoparcial.componentes.*;
@@ -13,6 +15,13 @@ public class EscenaDificultad extends Escena {
   public static final int PROFUNDIDAD_FACIL = 10;
   public static final int PROFUNDIDAD_MODERADO = 20;
   public static final int PROFUNDIDAD_DIFICIL = 50;
+  public static final double alpha1 = 0.7;
+  public static final double alpha2 = 0.3;
+  public static final double c1 = 0.2;
+  public static final double c2 = 0.8;
+  public static final double maxh1 = 12 * (c1 + c2);
+  public static final double maxh2 = (24.0 + 30.0 + 36.0) / 3.0;
+  public static final ParametrosEvaluacion evaluacion = new ParametrosEvaluacion(alpha1, maxh1, alpha2, maxh2, c1, c2);
 
   private int jugador1 = 0;
   private int jugador2 = 3;
@@ -28,11 +37,11 @@ public class EscenaDificultad extends Escena {
     generadores.add(() -> new AgenteAleatorio());
 
     etiquetas.add(String.format("Fácil-%d", PROFUNDIDAD_FACIL));
-    generadores.add(() -> new AgenteAlphaBeta(PROFUNDIDAD_FACIL));
+    generadores.add(() -> new AgenteAlphaBeta(PROFUNDIDAD_FACIL, evaluacion));
     etiquetas.add(String.format("Moderada-%d", PROFUNDIDAD_MODERADO));
-    generadores.add(() -> new AgenteAlphaBeta(PROFUNDIDAD_MODERADO));
+    generadores.add(() -> new AgenteAlphaBeta(PROFUNDIDAD_MODERADO, evaluacion));
     etiquetas.add(String.format("Difícil-%d", PROFUNDIDAD_DIFICIL));
-    generadores.add(() -> new AgenteAlphaBeta(PROFUNDIDAD_DIFICIL));
+    generadores.add(() -> new AgenteAlphaBeta(PROFUNDIDAD_DIFICIL, evaluacion));
   }
 
   private boolean continuar = false;

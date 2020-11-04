@@ -12,6 +12,7 @@ public class Tablero {
   public static final int COLUMNAS = 7;
   public static final int FILAS = 6;
   public static final int NUMEROGANADOR = 4;
+
   private Celda[][] celdas;
   private int[] contadores = new int[COLUMNAS];
   private boolean turnoJugador;
@@ -23,6 +24,20 @@ public class Tablero {
     for (Celda[] fila : celdas) {
       Arrays.fill(fila, Celda.Vacio);
     }
+  }
+
+  public Tablero(Tablero original) {
+    this();
+
+    for(int i = 0; i < FILAS; i++) {
+      System.arraycopy(original.celdas[i], 0, this.celdas[i], 0, COLUMNAS);
+    }
+    System.arraycopy(original.contadores, 0, this.contadores, 0, COLUMNAS);
+    this.turnoJugador = original.turnoJugador;
+  }
+
+  public static int obtenerDistancia(int[] coordenada) {
+    return Math.abs(coordenada[1] - 3);
   }
 
   public boolean estaVacio() {
