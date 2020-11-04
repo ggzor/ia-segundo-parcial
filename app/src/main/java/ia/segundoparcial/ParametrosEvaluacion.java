@@ -22,8 +22,8 @@ public class ParametrosEvaluacion {
     this.c2 = c2;
   }
 
-  public double f(Tablero tablero) {
-    return h(tablero, Celda.Jugador1) - h(tablero, Celda.Jugador2);
+  public double f(Tablero tablero, Celda jugador) {
+    return h(tablero, jugador) - h(tablero, jugador.contrario());
   }
 
   private double h(Tablero tablero, Celda jugador) {

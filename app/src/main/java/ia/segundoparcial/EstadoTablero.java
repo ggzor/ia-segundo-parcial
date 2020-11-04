@@ -8,8 +8,11 @@ public class EstadoTablero implements Estado<Integer> {
   private Tablero tablero;
   private Integer tiro;
   private ParametrosEvaluacion evaluacion;
+  private Celda jugador;
 
-  public EstadoTablero(Tablero tablero, Integer tiro, ParametrosEvaluacion evaluacion) {
+  public EstadoTablero(
+      Celda jugador, Tablero tablero, Integer tiro, ParametrosEvaluacion evaluacion) {
+    this.jugador = jugador;
     this.tablero = tablero;
     this.tiro = tiro;
     this.evaluacion = evaluacion;
@@ -22,7 +25,7 @@ public class EstadoTablero implements Estado<Integer> {
     for (int columna : tablero.obtenerColumnasDisponibles()) {
       Tablero nuevo = new Tablero(tablero);
       nuevo.tirar(columna);
-      expansiones.add(new EstadoTablero(nuevo, columna, evaluacion));
+      expansiones.add(new EstadoTablero(jugador, nuevo, columna, evaluacion));
     }
 
     return expansiones;
@@ -42,6 +45,6 @@ public class EstadoTablero implements Estado<Integer> {
 
   @Override
   public double f() {
-    return evaluacion.f(tablero);
+    return evaluacion.f(tablero, jugador);
   }
 }
