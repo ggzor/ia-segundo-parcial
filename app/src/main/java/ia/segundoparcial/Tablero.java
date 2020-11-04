@@ -4,8 +4,10 @@ import ia.segundoparcial.utils.Par;
 import ia.segundoparcial.utils.StreamUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Tablero {
@@ -77,29 +79,94 @@ public class Tablero {
     return celdas[FILAS - 1][i] == Celda.Vacio;
   }
 
+  private static ArrayList<Function<Celda[][], Stream<Stream<Par<int[], Celda>>>>> recorridosComp =
+      new ArrayList<>();
+
+  public int obtenerLineasCompletables(Celda jugador) {
+    if (recorridosComp.size() == 0) {
+      recorridosComp.add(StreamUtils::recorrerHorizontal);
+      recorridosComp.add(StreamUtils::recorrerDiagonalID);
+      recorridosComp.add(StreamUtils::recorrerDiagonalDI);
+    }
+
+    return (int)
+        recorridosComp.stream()
+            .map(f -> f.apply(celdas))
+            .reduce(Stream.empty(), Stream::concat)
+            .flatMap(
+                fila ->
+                    StreamUtils.agruparConsecutivos(
+                        fila,
+                        (p1, p2) ->
+                            (p1.segundo == jugador.contrario())
+                                == (p2.segundo == jugador.contrario())))
+            .filter(g -> g.get(0).segundo != jugador.contrario())
+            .filter(
+                g -> {
+                  List<List<Par<int[], Celda>>> subgrupos =
+                      StreamUtils.agruparConsecutivos(
+                              g.stream(), (p1, p2) -> p1.segundo == p2.segundo)
+                          .collect(Collectors.toList());
+                  if (subgrupos.size() >= 3) {
+                    for (int i = 1; i + 1 < subgrupos.size(); i++) {
+                      List<Par<int[], Celda>> izquierda = subgrupos.get(i - 1),
+                          actual = subgrupos.get(i),
+                          derecha = subgrupos.get(i + 1);
+
+                      // Si alguno está flotando
+                      if (actual.stream()
+                          .anyMatch(
+                              p -> {
+                                int fila = p.primero[0];
+                                int columna = p.primero[1];
+
+                                return fila != FILAS - 1
+                                    && celdas[fila + 1][columna] == Celda.Vacio;
+                              })) {
+                        continue;
+                      }
+
+                      if (izquierda.get(0).segundo == jugador
+                          && actual.get(0).segundo == Celda.Vacio
+                          && derecha.get(0).segundo == jugador) {
+                        if (izquierda.size() + derecha.size() >= 3) {
+                          return true;
+                        }
+                      }
+                    }
+                  }
+                  return false;
+                })
+            .count();
+  }
+
+  private static ArrayList<
+          Par<Function<Celda[][], Stream<Stream<Par<int[], Celda>>>>, Direccion[][]>>
+      direcciones = new ArrayList<>();
+
   public int[][][] obtenerLineasConsecutivas(int n, Celda jugador) {
-    ArrayList<Par<Function<Celda[][], Stream<Stream<Par<int[], Celda>>>>, Direccion[][]>>
-        direcciones = new ArrayList<>();
-    direcciones.add(
-        Par.de(
-            StreamUtils::recorrerHorizontal,
-            new Direccion[][] {{Direccion.Izquierda}, {Direccion.Derecha}}));
-    direcciones.add(
-        Par.de(
-            StreamUtils::recorrerVertical,
-            new Direccion[][] {{Direccion.Abajo}, {Direccion.Arriba}}));
-    direcciones.add(
-        Par.de(
-            StreamUtils::recorrerDiagonalID,
-            new Direccion[][] {
-              {Direccion.Abajo, Direccion.Izquierda}, {Direccion.Arriba, Direccion.Derecha}
-            }));
-    direcciones.add(
-        Par.de(
-            StreamUtils::recorrerDiagonalDI,
-            new Direccion[][] {
-              {Direccion.Abajo, Direccion.Derecha}, {Direccion.Arriba, Direccion.Izquierda}
-            }));
+    if (direcciones.size() == 0) {
+      direcciones.add(
+          Par.de(
+              StreamUtils::recorrerHorizontal,
+              new Direccion[][] {{Direccion.Izquierda}, {Direccion.Derecha}}));
+      direcciones.add(
+          Par.de(
+              StreamUtils::recorrerVertical,
+              new Direccion[][] {{Direccion.Abajo}, {Direccion.Arriba}}));
+      direcciones.add(
+          Par.de(
+              StreamUtils::recorrerDiagonalID,
+              new Direccion[][] {
+                {Direccion.Abajo, Direccion.Izquierda}, {Direccion.Arriba, Direccion.Derecha}
+              }));
+      direcciones.add(
+          Par.de(
+              StreamUtils::recorrerDiagonalDI,
+              new Direccion[][] {
+                {Direccion.Abajo, Direccion.Derecha}, {Direccion.Arriba, Direccion.Izquierda}
+              }));
+    }
 
     return direcciones.stream()
         .flatMap(

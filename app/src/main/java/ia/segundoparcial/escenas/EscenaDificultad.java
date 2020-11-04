@@ -12,16 +12,22 @@ import java.util.stream.IntStream;
 /** EscenaDificultad */
 public class EscenaDificultad extends Escena {
   public static final int PROFUNDIDAD_FACIL = 2;
-  public static final int PROFUNDIDAD_MODERADO = 8;
+  public static final int PROFUNDIDAD_MODERADO = 7;
   public static final int PROFUNDIDAD_DIFICIL = 15;
-  public static final double alpha1 = 0.85;
-  public static final double alpha2 = 0.15;
-  public static final double c1 = 0.2;
-  public static final double c2 = 0.8;
+
+  public static final double alpha1 = 0.6;
+  public static final double alpha2 = 0.1;
+  public static final double alpha3 = 0.3;
+
+  public static final double c1 = 0.1;
+  public static final double c2 = 0.9;
+
   public static final double maxh1 = 12 * (c1 + c2);
   public static final double maxh2 = (24.0 + 30.0 + 36.0) / 3.0;
+  public static final double maxh3 = 5.0;
+
   public static final ParametrosEvaluacion evaluacion =
-      new ParametrosEvaluacion(alpha1, maxh1, alpha2, maxh2, c1, c2);
+      new ParametrosEvaluacion(alpha1, maxh1, alpha2, maxh2, alpha3, maxh3, c1, c2);
 
   private int jugador1 = 0;
   private int jugador2 = 3;
