@@ -134,7 +134,10 @@ public class EscenaJuego extends Escena {
         Decorar.Ocultar(
             ganador == null,
             Decorar.Color(
-                Recursos.FOREGROUND, new Label("El ganador es: " + ganador, Recursos.FUENTE))),
+                Recursos.FOREGROUND,
+                new Label(
+                    ganador == Celda.Vacio ? "Empate" : "El ganador es: " + ganador,
+                    Recursos.FUENTE))),
         Espacio.A(16),
         new Boton("Volver", () -> volver = true));
   }
