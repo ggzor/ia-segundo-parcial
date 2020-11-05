@@ -19,9 +19,12 @@ public class EscenaPrincipal extends Escena {
         Flex.Vertical,
         Flex.Centro,
         new Componente[] {
-          new Imagen(Recursos.SPLASH_SCREEN, 0.2),
+          Decorar.Color(
+              Recursos.FOREGROUND, new Label("Conecta 4 - Segundo Parcial", Recursos.FUENTE)),
+          new Imagen(Recursos.SPLASH_SCREEN, 0.8),
+          Espacio.A(32),
           new Boton("Jugar", () -> siguientePresionado = true),
-          Espacio.A(12),
+          Espacio.A(16),
           new Boton("Salir", () -> System.exit(0))
         });
   }
