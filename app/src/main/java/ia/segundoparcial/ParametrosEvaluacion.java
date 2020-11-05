@@ -46,7 +46,7 @@ public class ParametrosEvaluacion {
   private double h1(Tablero tablero, Celda jugador) {
     double k2 = tablero.obtenerLineasConsecutivas(2, jugador).length;
     double k3 = tablero.obtenerLineasConsecutivas(3, jugador).length;
-    double k4 = tablero.obtenerLineasConsecutivas(4, jugador).length;
+    double k4 = tablero.esGanador(jugador) ? 1 : 0;
 
     return c1 * k2 + c2 * k3 + 6 * (c1 + c2) * k4;
   }
