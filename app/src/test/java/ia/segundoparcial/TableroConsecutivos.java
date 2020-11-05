@@ -114,7 +114,7 @@ public class TableroConsecutivos {
   }
 
   @Test
-  public void ganarJuegoD1() {
+  public void ganarJuegoD1PrimeraMitad() {
     // spotless:off
     Optional<Tablero> t = Tablero.deArreglo(new String[] {
       "       ",
@@ -131,7 +131,41 @@ public class TableroConsecutivos {
   }
 
   @Test
-  public void ganarJuegoD2() {
+  public void ganarJuegoD1SegundaMitad() {
+    // spotless:off
+    Optional<Tablero> t = Tablero.deArreglo(new String[] {
+      "       ",
+      "   2   ",
+      "   221 ",
+      "  1122 ",
+      "  12122",
+      "1121121",
+    });
+    // spotless:on
+
+    assertTrue(t.isPresent());
+    assertTrue(t.get().esGanador(Celda.Jugador2));
+  }
+
+  @Test
+  public void ganarJuegoD2PrimeraMitad() {
+    // spotless:off
+    Optional<Tablero> t = Tablero.deArreglo(new String[] {
+      "       ",
+      "       ",
+      "     1 ",
+      "1222111",
+      "1221121",
+      "1212211",
+    });
+    // spotless:on
+
+    assertTrue(t.isPresent());
+    assertTrue(t.get().esGanador(Celda.Jugador1));
+  }
+
+  @Test
+  public void ganarJuegoD2SegundaMitad() {
     // spotless:off
     Optional<Tablero> t = Tablero.deArreglo(new String[] {
       "   1   ",

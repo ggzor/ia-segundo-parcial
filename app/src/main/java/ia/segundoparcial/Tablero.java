@@ -417,7 +417,7 @@ public class Tablero {
       auxCelda = fila;
       columna = COLUMNAS - 1;
       while (auxCelda >= 0 && columna >= 0) {
-        if (celdas[fila][auxCelda] == jugador) {
+        if (celdas[auxCelda][columna] == jugador) {
           k = 0;
           while (celdas[auxCelda][columna] == jugador) {
             columna--;
