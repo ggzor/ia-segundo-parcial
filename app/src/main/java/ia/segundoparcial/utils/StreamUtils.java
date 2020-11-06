@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
+// Utilerías para administrar Streams
 public class StreamUtils {
+  // Agrupar elementos consecutivos de un stream dado un predicado binario
   public static <A> Stream<List<A>> agruparConsecutivos(Stream<A> stream, BiPredicate<A, A> pred) {
     ArrayList<List<A>> resultado = new ArrayList<>();
 
@@ -31,6 +33,7 @@ public class StreamUtils {
     return resultado.stream();
   }
 
+  // Recorrer un arreglo fila a fila de abajo hacia arriba
   public static <A> Stream<Stream<Par<int[], A>>> recorrerHorizontal(A[][] arreglo) {
     ArrayList<ArrayList<Par<int[], A>>> resultado = new ArrayList<>();
 
@@ -46,6 +49,7 @@ public class StreamUtils {
     return resultado.stream().map(l -> l.stream());
   }
 
+  // Recorrer un arreglo columna a columna de izquierda a derecha
   public static <A> Stream<Stream<Par<int[], A>>> recorrerVertical(A[][] arreglo) {
     ArrayList<ArrayList<Par<int[], A>>> resultado = new ArrayList<>();
 
@@ -61,6 +65,7 @@ public class StreamUtils {
     return resultado.stream().map(l -> l.stream());
   }
 
+  // Recorre en diagonal de abajo hacia arriba y de izquierda a derecha
   public static <A> Stream<Stream<Par<int[], A>>> recorrerDiagonalID(A[][] arreglo) {
     ArrayList<ArrayList<Par<int[], A>>> resultado = new ArrayList<>();
 
@@ -85,6 +90,7 @@ public class StreamUtils {
     return resultado.stream().map(l -> l.stream());
   }
 
+  // Recorre en diagonal de abajo hacia arriba y de derecha a izquierda
   public static <A> Stream<Stream<Par<int[], A>>> recorrerDiagonalDI(A[][] arreglo) {
     ArrayList<ArrayList<Par<int[], A>>> resultado = new ArrayList<>();
 
