@@ -4,6 +4,8 @@ import com.golden.gamedev.Game;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 
+// Implementa la lógica para un componente que agrega configuraciones
+// antes o después del dibujado o actualización de otro componente
 public abstract class Decorador extends Componente {
   protected Componente componente;
 

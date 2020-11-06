@@ -24,6 +24,7 @@ public class Utilerias {
     return new Point((int) transformado[0].getX(), (int) transformado[0].getY());
   }
 
+  // Verifica si un punto se encuentra dentro de las medidas dadas
   public static boolean dentroDe(Dimension medidas, Point mouse) {
     return 0 <= mouse.getX()
         && mouse.getX() < medidas.getWidth()

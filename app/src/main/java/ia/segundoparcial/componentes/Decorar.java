@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 
 // Clase con utilerías para decorar elementos
 public class Decorar {
+  // Establecer el color antes de dibujar el componente
   public static Decorador Color(Color color, Componente componente) {
     return new Decorador(componente) {
       @Override
@@ -16,6 +17,7 @@ public class Decorar {
     };
   }
 
+  // Obtener la posición del mouse después del dibujado
   public static Decorador PosicionMouse(Consumer<Point> notificar, Componente componente) {
     return new Decorador(componente) {
       @Override
@@ -26,6 +28,7 @@ public class Decorar {
     };
   }
 
+  // Verificar si el mouse se encuentra dentro de este componente
   public static Decorador MouseDentro(Consumer<Boolean> notificar, Componente componente) {
     return new Decorador(componente) {
       private Point mouse;
@@ -42,6 +45,7 @@ public class Decorar {
     };
   }
 
+  // Agregar un margen a un elemento
   public static Decorador Margen(int margenX, int margenY, Componente componente) {
     return new Decorador(componente) {
       @Override
@@ -59,6 +63,7 @@ public class Decorar {
     };
   }
 
+  // Cambiar el fondo con el que se va a dibujar un componente
   public static Decorador Fondo(Color color, Componente componente) {
     return new Decorador(componente) {
       @Override
@@ -71,6 +76,7 @@ public class Decorar {
     };
   }
 
+  // Ocultar un componente pero conservar sus dimensiones
   public static Decorador Ocultar(boolean oculto, Componente componente) {
     return new Decorador(componente) {
       @Override
@@ -80,6 +86,7 @@ public class Decorar {
     };
   }
 
+  // Cambiar el componente que será dibujado a partir del arreglo de componentes
   public static Componente Conmutar(int indice, Componente... componentes) {
     return new Componente() {
       @Override

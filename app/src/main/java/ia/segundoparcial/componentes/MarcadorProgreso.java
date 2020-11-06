@@ -5,6 +5,7 @@ import ia.segundoparcial.Recursos;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 
+// Un componente que sólamente agrega un indicador de progreso
 public class MarcadorProgreso extends Componente {
 
   private static final int PERIODO = 2000;

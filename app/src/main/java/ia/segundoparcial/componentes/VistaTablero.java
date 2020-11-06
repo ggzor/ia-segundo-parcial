@@ -6,6 +6,7 @@ import ia.segundoparcial.Recursos;
 import ia.segundoparcial.Tablero;
 import java.awt.*;
 
+// Componente para mostrar un tablero
 public class VistaTablero extends Componente {
   public static final int MEDIDA_CELDA = 32;
   public static final int GAP = 8;

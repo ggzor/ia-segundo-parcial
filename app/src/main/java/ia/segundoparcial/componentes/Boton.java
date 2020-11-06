@@ -4,6 +4,7 @@ import com.golden.gamedev.Game;
 import ia.segundoparcial.Recursos;
 import java.awt.*;
 
+// Clase que representa un componente que implementa la lógica de un botón
 public class Boton extends Componente {
   public static int PAD_X = 16;
   public static int PAD_Y = 12;
@@ -21,6 +22,8 @@ public class Boton extends Componente {
 
   @Override
   public void update(Game game, long elapsed) {
+    // Prepararse para recibir un click, ya que GTGE sólo nos garantiza un correcto
+    // cálculo de click durante un update
     hayClick = game.click();
   }
 

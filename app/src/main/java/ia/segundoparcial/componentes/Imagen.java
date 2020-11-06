@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.*;
 
+// Clase para mostrar una imagen con una escala dada
 public class Imagen extends Componente {
 
   private BufferedImage imagen;
