@@ -6,8 +6,8 @@ import ia.segundoparcial.agentes.*;
 import ia.segundoparcial.componentes.*;
 import java.util.concurrent.*;
 
+// La escena del juego principal
 public class EscenaJuego extends Escena {
-  public static final int TIEMPO_GANADOR = 1000;
   private Tablero tablero;
   private int indiceActual;
 
@@ -39,8 +39,10 @@ public class EscenaJuego extends Escena {
 
   @Override
   public Escena actualizar(Game app, long elapsedTime) {
+    // Cuando se presiona el botón volver se devuelve al menú anterior
     if (volver) return new EscenaDificultad();
     else {
+      // Verificar si existe un ganador o si ha ocurrido un empate
       ganador =
           tablero.esGanador(Celda.Jugador1)
               ? Celda.Jugador1
@@ -54,12 +56,12 @@ public class EscenaJuego extends Escena {
           tiempoGanador = System.currentTimeMillis();
         }
       } else {
-
         Agente agente = tablero.obtenerJugadorActual() == Celda.Jugador1 ? jugador1 : jugador2;
 
         switch (estadoAgente) {
           default:
           case Esperando:
+            // Si el agente es una persona, esperar tiro con el mouse
             if (agente instanceof Persona) {
               if (mouseDentroJuego) {
                 indiceActual = nuevoIndice;
@@ -69,6 +71,7 @@ public class EscenaJuego extends Escena {
                 }
               }
             } else {
+              // Lanzar la ejecución del cálculo del tiro del agente automático
               AgenteAutomatico agenteAutomatico = (AgenteAutomatico) agente;
               respuestaAgente = agenteAutomatico.calcularTiro(tablero);
               tiempoInicioPensar = System.currentTimeMillis();

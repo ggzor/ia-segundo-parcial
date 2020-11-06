@@ -4,11 +4,13 @@ import com.golden.gamedev.Game;
 import ia.segundoparcial.Recursos;
 import ia.segundoparcial.componentes.*;
 
+// La escena que muestra el menú principal del juego
 public class EscenaPrincipal extends Escena {
   boolean siguientePresionado = false;
 
   @Override
   public Escena actualizar(Game app, long elapsedTime) {
+    // Cambiar de escena cuando se solicite
     if (siguientePresionado) return new EscenaDificultad();
     else return this;
   }

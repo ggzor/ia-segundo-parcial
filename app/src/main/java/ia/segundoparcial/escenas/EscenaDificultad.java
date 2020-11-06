@@ -9,7 +9,10 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.IntStream;
 
-/** EscenaDificultad */
+/**
+ * La escena del menú de selección de dificultad, además incluye los pesos y las profundidades
+ * determinadas como las mejores para el juego
+ */
 public class EscenaDificultad extends Escena {
   public static final int PROFUNDIDAD_FACIL = 2;
   public static final int PROFUNDIDAD_MODERADO = 5;
