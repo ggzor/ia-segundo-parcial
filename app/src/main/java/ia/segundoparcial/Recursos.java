@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.InputStream;
 
+// Los recursos utilizados por el juego
 public class Recursos {
   public static final BufferedImage SPLASH_SCREEN =
       ImageUtil.getImage(Recursos.class.getResource("/splash_screen.png"));

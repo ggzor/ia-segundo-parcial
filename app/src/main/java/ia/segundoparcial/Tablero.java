@@ -10,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+// La clase principal para representar un tablero
 public class Tablero {
   public static final int COLUMNAS = 7;
   public static final int FILAS = 6;
@@ -19,6 +20,7 @@ public class Tablero {
   private int[] contadores = new int[COLUMNAS];
   private boolean turnoJugador;
 
+  // Constructor para un tablero vacío
   public Tablero() {
     celdas = new Celda[FILAS][COLUMNAS];
     Arrays.fill(contadores, 5);
@@ -28,6 +30,7 @@ public class Tablero {
     }
   }
 
+  // Constructor por copia
   public Tablero(Tablero original) {
     this();
 
@@ -38,10 +41,7 @@ public class Tablero {
     this.turnoJugador = original.turnoJugador;
   }
 
-  public static int obtenerDistancia(int[] coordenada) {
-    return Math.abs(coordenada[1] - 3);
-  }
-
+  // Método para saber si un tablero está vacío
   public boolean estaVacio() {
     for (Celda[] fila : celdas) {
       for (Celda celda : fila) {
@@ -52,10 +52,12 @@ public class Tablero {
     return true;
   }
 
+  // Método para saber si el tablero se encuentra lleno
   public boolean estaLleno() {
     return Arrays.stream(celdas).flatMap(Arrays::stream).allMatch(c -> c != Celda.Vacio);
   }
 
+  // Método para obtener el valor de una celda en una coordenada dada
   public Celda obtener(int fila, int columna) {
     boolean estaRangoFilas = 0 <= fila && fila <= FILAS - 1;
     boolean estaRangoColumnas = 0 <= columna && columna <= COLUMNAS - 1;
@@ -65,6 +67,7 @@ public class Tablero {
     throw new IllegalArgumentException("Coordenada fuera de límites");
   }
 
+  // Método principal para realizar un tiro en la columna dada
   public boolean tirar(int columna) {
     int fila = contadores[columna];
     if (fila == -1) return false;
@@ -75,6 +78,7 @@ public class Tablero {
     return true;
   }
 
+  // Método para saber si una columna contiene tiros de algun jugador
   public boolean estaVaciaColumna(int i) {
     return celdas[FILAS - 1][i] == Celda.Vacio;
   }
@@ -82,6 +86,7 @@ public class Tablero {
   private static ArrayList<Function<Celda[][], Stream<Stream<Par<int[], Celda>>>>> recorridosComp =
       new ArrayList<>();
 
+  // Función principal para calcular las líneas completables de uno de los jugadores
   public int obtenerLineasCompletables(Celda jugador) {
     if (recorridosComp.size() == 0) {
       recorridosComp.add(StreamUtils::recorrerHorizontal);
@@ -93,6 +98,7 @@ public class Tablero {
         recorridosComp.stream()
             .map(f -> f.apply(celdas))
             .reduce(Stream.empty(), Stream::concat)
+            // Obtener grupos consecutivos de vacíos o del jugador
             .flatMap(
                 fila ->
                     StreamUtils.agruparConsecutivos(
@@ -100,20 +106,26 @@ public class Tablero {
                         (p1, p2) ->
                             (p1.segundo == jugador.contrario())
                                 == (p2.segundo == jugador.contrario())))
+            // Remover los grupos que pertenecen al jugador contrario
             .filter(g -> g.get(0).segundo != jugador.contrario())
+            // Remover los grupos que no siguen el patrón de las líneas completables
             .filter(
                 g -> {
+                  // Agrupar celdas por tipo
                   List<List<Par<int[], Celda>>> subgrupos =
                       StreamUtils.agruparConsecutivos(
                               g.stream(), (p1, p2) -> p1.segundo == p2.segundo)
                           .collect(Collectors.toList());
+
+                  // Sólo nos importan los grupos con más de 3 subgrupos
                   if (subgrupos.size() >= 3) {
+                    // Revisar los grupos de 3 en 3 con una ventana deslizante
                     for (int i = 1; i + 1 < subgrupos.size(); i++) {
                       List<Par<int[], Celda>> izquierda = subgrupos.get(i - 1),
                           actual = subgrupos.get(i),
                           derecha = subgrupos.get(i + 1);
 
-                      // Si alguno está flotando
+                      // Si alguno está flotando se debe ignorar
                       if (actual.stream()
                           .anyMatch(
                               p -> {
@@ -126,6 +138,7 @@ public class Tablero {
                         continue;
                       }
 
+                      // Si es un grupo de vacío rodeado de más de 3 celdas del jugador
                       if (izquierda.get(0).segundo == jugador
                           && actual.get(0).segundo == Celda.Vacio
                           && derecha.get(0).segundo == jugador) {
@@ -144,8 +157,10 @@ public class Tablero {
           Par<Function<Celda[][], Stream<Stream<Par<int[], Celda>>>>, Direccion[][]>>
       direcciones = new ArrayList<>();
 
-  public int[][][] obtenerLineasConsecutivas(int n, Celda jugador) {
+  // Función principal para obtener las líneas extensibles de cierta medida para un jugador
+  public int[][][] obtenerLineasExtensibles(int n, Celda jugador) {
     if (direcciones.size() == 0) {
+      // Construir recorridos e indicaciones de expansíón
       direcciones.add(
           Par.de(
               StreamUtils::recorrerHorizontal,
@@ -196,6 +211,7 @@ public class Tablero {
         .toArray(int[][][]::new);
   }
 
+  // Función en desuso para calcular las celdas consecutivas de un jugador
   public int obtenerConsecutivos(int n, Celda jugador) {
     int contador, fila, columna, k;
     boolean bandera;
@@ -520,6 +536,7 @@ public class Tablero {
     return Optional.of(t);
   }
 
+  // Función para determinar las columnas disponibles en dónde se puede realizar un tiro
   public int[] obtenerColumnasDisponibles() {
     int j, contador;
     j = contador = 0;
@@ -541,6 +558,15 @@ public class Tablero {
     return vacias;
   }
 
+  // Representa la direccion en la que se va a aplicar el desplazamiento
+  private static enum Direccion {
+    Arriba,
+    Derecha,
+    Abajo,
+    Izquierda
+  };
+
+  // Función de utilería para aplicar a una coordenada un movimiento en la direccion dada
   private static Par<Integer, Integer> aplicar(Par<Integer, Integer> coord, Direccion direccion) {
     int dx, dy;
 
@@ -567,6 +593,7 @@ public class Tablero {
     return Par.de(coord.primero + dy, coord.segundo + dx);
   }
 
+  // Aplica los movimientos especificados en direcciones a la coordenada dada
   private static Par<Integer, Integer> aplicarMultiple(
       Par<Integer, Integer> coord, Direccion... direcciones) {
     Par<Integer, Integer> inicial = coord;
@@ -576,6 +603,7 @@ public class Tablero {
     return inicial;
   }
 
+  // Verifica que una coordenada se encuentre dentro de un tablero
   private static boolean dentroTablero(Par<Integer, Integer> coord) {
     return 0 <= coord.primero
         && coord.primero < FILAS
@@ -583,13 +611,7 @@ public class Tablero {
         && coord.segundo < COLUMNAS;
   }
 
-  private static enum Direccion {
-    Arriba,
-    Derecha,
-    Abajo,
-    Izquierda
-  };
-
+  // Verifica que una coordenada pueda extenderse
   private boolean puedeExtenderse(Par<Integer, Integer> coord, Direccion... direcciones) {
     Par<Integer, Integer> desplazada = aplicarMultiple(coord, direcciones);
 
@@ -598,5 +620,10 @@ public class Tablero {
     } else {
       return false;
     }
+  }
+
+  // Obtiene la distancia de la coordenada dada al centro
+  public static int obtenerDistancia(int[] coordenada) {
+    return Math.abs(coordenada[1] - 3);
   }
 }

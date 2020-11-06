@@ -183,7 +183,7 @@ public class TableroLineasConsecutivas {
     assertTrue(resultado.isPresent());
     Tablero tablero = resultado.get();
 
-    assertArrayEquals(esperadoJugador1, tablero.obtenerLineasConsecutivas(2, Celda.Jugador1));
+    assertArrayEquals(esperadoJugador1, tablero.obtenerLineasExtensibles(2, Celda.Jugador1));
   }
 
   @Test
@@ -205,6 +205,6 @@ public class TableroLineasConsecutivas {
     assertTrue(resultado.isPresent());
     Tablero tablero = resultado.get();
 
-    assertEquals(17, tablero.obtenerLineasConsecutivas(2, Celda.Jugador1).length);
+    assertEquals(17, tablero.obtenerLineasExtensibles(2, Celda.Jugador1).length);
   }
 }

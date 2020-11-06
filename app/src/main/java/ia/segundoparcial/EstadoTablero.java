@@ -3,8 +3,9 @@ package ia.segundoparcial;
 import ia.segundoparcial.alphabeta.Estado;
 import java.util.ArrayList;
 
+// Clase que implementa la interfaz Estado para poder utilizar el algoritmo
+// minimax con poda alpha-beta
 public class EstadoTablero implements Estado<Integer> {
-
   private Tablero tablero;
   private Integer tiro;
   private ParametrosEvaluacion evaluacion;
@@ -38,6 +39,8 @@ public class EstadoTablero implements Estado<Integer> {
 
   @Override
   public boolean esTerminal() {
+    // Un tablero es terminal cuando alguno de los jugadores ha ganado o
+    // se ha llenado el tablero y ninguno ha ganado (empate)
     return tablero.esGanador(Celda.Jugador1)
         || tablero.esGanador(Celda.Jugador2)
         || tablero.estaLleno();
