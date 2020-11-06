@@ -7,7 +7,7 @@ import ia.segundoparcial.alphabeta.AlphaBeta;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 
-/** AgenteAlphaBeta */
+/** Un agente que puede realizar tiros utilizando minimax con alpha-beta */
 public class AgenteAlphaBeta extends AgenteAutomatico {
   private ForkJoinPool pool = new ForkJoinPool();
   private final int horizonteLimitado;
